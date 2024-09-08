@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllEmp, addEmp, updateEmp, deleteEmp } from "../controller/userController.js";
+import userController from "../controller/userController.js";
 
 
 
@@ -10,6 +10,7 @@ router.get("/getAll", getAllEmp);
 router.post("/addEmp", addEmp);
 router.post("/updateEmp/:id", updateEmp);
 router.delete("/deleteEmp/:id", deleteEmp);
+router.get('/employees/:id', getEmpById);
 
 
 export default router;
