@@ -1,6 +1,8 @@
 import { UserModel } from "../postgres/postgres.js";
 
 export const getAllEmp = async (req,res)=>{
+    console.log(hello);
+       
     try {
         const users = await UserModel.findAll();
         if(users.length == 0 ){
@@ -12,6 +14,28 @@ export const getAllEmp = async (req,res)=>{
         return res.status(500).json({"error":"internal server error"})
     }
 }
+
+export const getEmp = async (req,res)=>{
+
+  const { id } = req.params;
+  
+  try {
+
+    const emp = await UserModel.findOne({ where: { id } }); 
+
+    if (emp) {
+      return res.status(200).json(emp); 
+    }
+
+    return res.status(404).json({ message: "Employee not found" }); 
+
+  } catch (e) {
+    
+    console.log(e);
+    return res.status(500).json({ error: "Internal server error" }); 
+    
+  }
+};
 
 export const addEmp = async (req,res)=>{
     console.log(req.body);
